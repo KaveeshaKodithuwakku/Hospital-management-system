@@ -189,7 +189,7 @@ public class Main {
                              patients[i][3] = tele;
 
                              if(patients[i][0] != null && patients[i][1] != null && patients[i][2] != null && patients[i][3] != null){
-                                 System.out.println("Patient details successfully added\n");
+                                 System.out.println("Patient details successfully added.\n");
                              }
 
                         break outer;
@@ -241,7 +241,7 @@ public class Main {
                     }
                 }
             }else{
-                System.out.println("No records found");
+                System.out.println("No records found.");
             }
         }else{
             System.out.println("Please enter valid patient id.");
@@ -277,16 +277,16 @@ public class Main {
                         patients[i][3] = tele;
 
                         if(patients[i][1] != null && patients[i][2]!= null && patients[i][3] != null){
-                            System.out.println("Patient details successfully updated\n");
+                            System.out.println("Patient details successfully updated.\n");
                         }
 
                         return;
                     }else{
-                        System.out.println("22222");
+                        System.out.println("No records found.");
                     }
                 }
             }
-            System.out.println("No records found");
+            System.out.println("No records found.");
         }else{
             System.out.println("Entered Id is wrong. Please check again.");
         }
@@ -312,12 +312,12 @@ public class Main {
 
 
                         if(patients[i][0] == null && patients[i][1] == null && patients[i][2] == null && patients[i][3] == null ){
-                            System.out.println("Patient details successfully deleted\n");
+                            System.out.println("Patient details successfully deleted.\n");
                         }
 
                         return;
                     } else {
-                        System.out.println("No records found");
+                        System.out.println("No records found.");
                     }
                 }
             }
@@ -473,13 +473,13 @@ public class Main {
                         if(doctors[i][0].equals(fDId)){
                             System.out.print(doctors[i][0]+ "          " );
                             System.out.print(doctors[i][1] + "              " );
-                            System.out.println(doctors[i][2]);
+                            System.out.println(doctors[i][2] + "\n");
                             return;
                         }
                     }
                 }
             }else{
-                System.out.println("No records found");
+                System.out.println("No records found.");
             }
         }else{
             System.out.println("Entered Id is wrong. Please check again.");
@@ -504,7 +504,7 @@ public class Main {
                         doctors[i][2] = input.nextLine();
 
                         if(doctors[i][0] != null && doctors[i][1] != null && doctors[i][2] != null){
-                            System.out.println("Doctor details successfully updated\n");
+                            System.out.println("Doctor details successfully updated.\n");
                         }
                         return;
                     }
@@ -535,7 +535,7 @@ public class Main {
                             doctors[i][2] = null;
 
                             if(doctors[i][0] == null && doctors[i][1] == null && doctors[i][2] == null){
-                                System.out.println("Doctor details successfully deleted\n");
+                                System.out.println("Doctor details successfully deleted.\n");
                             }
                             return;
                         }else{
@@ -618,51 +618,56 @@ public class Main {
                 return;
             }
 
-            outer: for(int i=0; i < appointment.length; i++){
-                inner: for(int j=0; j< appointment[i].length; j++){
+            if(patientsList[0][0] != null && doctorsList[0][0] != null){
 
-                    if(appointment[i][j]== null) {
-                        System.out.println("------ Make An Appointment Here ------");
-                        String aId = "", pId = "", dId = "";
+                outer: for(int i=0; i < appointment.length; i++){
+                    inner: for(int j=0; j< appointment[i].length; j++){
 
-                        do {
-                            System.out.println("Enter Appointment Id : ");
-                            aId = input.nextLine();
+                        if(appointment[i][j]== null) {
+                            System.out.println("------ Make An Appointment Here ------");
+                            String aId = "", pId = "", dId = "";
 
-                        } while (isExistAppointment(appointment, aId));
+                            do {
+                                System.out.println("Enter Appointment Id : ");
+                                aId = input.nextLine();
 
+                            } while (isExistAppointment(appointment, aId));
 
-                        appointment[i][0] = aId;
+                            appointment[i][0] = aId;
 
-                        do {
-                            System.out.println("Enter Doctor Id : ");
-                            dId = input.nextLine();
-                        } while (isExistDoctor(patientsList, dId));
+                            do {
+                                System.out.println("Enter Doctor Id : ");
+                                dId = input.nextLine();
+                            } while (isExistDoctor(doctorsList, dId));
 
-                        appointment[i][1] = dId;
+                            appointment[i][1] = dId;
 
-                        do {
-                            System.out.println("Enter Patient Id : ");
-                            pId = input.nextLine();
-                        } while (isExistPatient(patientsList, dId));
+                            do {
+                                System.out.println("Enter Patient Id : ");
+                                pId = input.nextLine();
+                            } while (isExistPatient(patientsList, dId));
 
-                        appointment[i][2] = pId;
+                            appointment[i][2] = pId;
 
-                        System.out.println("Enter Appointment Date : ");
-                        appointment[i][3] = input.nextLine();
-                        System.out.println("Enter Appointment Time : ");
-                        appointment[i][4] = input.nextLine();
+                            System.out.println("Enter Appointment Date : ");
+                            appointment[i][3] = input.nextLine();
+                            System.out.println("Enter Appointment Time : ");
+                            appointment[i][4] = input.nextLine();
 
-                        if(appointment[i][0] != null && appointment[i][1] != null && appointment[i][2] != null && appointment[i][3] != null && appointment[i][4] != null){
-                            System.out.println("Successfully make an appointment \n");
+                            if(appointment[i][0] != null && appointment[i][1] != null && appointment[i][2] != null && appointment[i][3] != null && appointment[i][4] != null){
+                                System.out.println("Successfully make an appointment. \n");
+                            }
+
+                            break outer;
+                        }else{
+                            break inner;
                         }
-
-                        break outer;
-                    }else{
-                        break inner;
                     }
                 }
+            }else {
+                System.out.println("No doctor and patient details.\n");
             }
+
 
             System.out.println("Do you need to add another appointment?");
             System.out.println("1). Yes");
@@ -770,11 +775,11 @@ public class Main {
             if(tele.length() == 10){
              return false;
             }else {
-                System.out.println("Invalid contact number.Please check and try again\n");
+                System.out.println("Invalid contact number.Please check and try again.\n");
                 return true;
             }
         }else{
-            System.out.println("Invalid contact number. Please check and try again\n");
+            System.out.println("Invalid contact number. Please check and try again.\n");
             return true;
         }
     }
@@ -843,7 +848,8 @@ public class Main {
     public static boolean isExistPatient(String[][] patients, String id){
 
         if(patients[0][0] == null){
-            return false;
+            System.out.println("Please add patient details firstly.");
+           return false;
         }
 
         for(int i=0; i<patients.length; i++){
