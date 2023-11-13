@@ -226,20 +226,29 @@ public class Main {
                 System.out.println("Id" + "             " + "Name" + "              " + "Age" + "             " + "Contact");
                 System.out.println("------------------------------------------------------------------------");
 
-                for(int i=0; i < patients.length; i++) {
-                    for (int j = 0; j < patients[i].length; j++) {
-
-                        if(patients[i][0].equals(fPId)){
-                            System.out.print(patients[i][0]+ "          " );
-                            System.out.print(patients[i][1] + "              " );
-                            System.out.print(patients[i][2]+ "              " );
-                            System.out.println(patients[i][3]);
-                            return;
-                        }else{
-                            System.out.println("Entered Id is wrong. Please check again.");
-                        }
+                for (String[] patient : patients) {
+                    if (patient != null && patient[0] != null && patient[0].equals(fPId)) {
+                        System.out.print(patient[0] + "          ");
+                        System.out.print(patient[1] + "              ");
+                        System.out.print(patient[2] + "              ");
+                        System.out.println(patient[3]);
+                        return;
                     }
                 }
+//
+//                for(int i=0; i < patients.length; i++) {
+//                   for (int j = 0; j < patients[i].length; j++) {
+//
+//                        if(patients[i][0].equals(fPId) && patients[i][0] != null){
+//                            System.out.print(patients[i][0]+ "          " );
+//                            System.out.print(patients[i][1] + "              " );
+//                            System.out.print(patients[i][2]+ "              " );
+//                            System.out.println(patients[i][3]);
+//                            return;
+//                        }
+//                    }
+//                }
+                System.out.println("No records found.");
             }else{
                 System.out.println("No records found.");
             }
@@ -258,39 +267,38 @@ public class Main {
         String uPId = input.nextLine();
         String tele = "";
 
-        if(uPId != null){
-            for(int i=0; i < patients.length; i++) {
-                for (int j = 0; j < patients[i].length; j++) {
+            if(uPId != null){
+                for(int i=0; i < patients.length; i++) {
+                    for (int j = 0; j < patients[i].length; j++) {
 
-                    if(patients[i][0].equals(uPId)){
+                        if(patients[i][0].equals(uPId) && patients[i][0] != null){
 
-                        System.out.println("Enter patient name : ");
-                        patients[i][1] = input.nextLine();
-                        System.out.println("Enter patient age : ");
-                        patients[i][2] = input.nextLine();
+                            System.out.println("Enter patient name : ");
+                            patients[i][1] = input.nextLine();
+                            System.out.println("Enter patient age : ");
+                            patients[i][2] = input.nextLine();
 
-                        do {
-                            System.out.println("Enter Patient Contact : ");
-                            tele = input.nextLine();
-                        } while (isValidContact(tele));
+                            do {
+                                System.out.println("Enter Patient Contact : ");
+                                tele = input.nextLine();
+                            } while (isValidContact(tele));
 
-                        patients[i][3] = tele;
+                            patients[i][3] = tele;
 
-                        if(patients[i][1] != null && patients[i][2]!= null && patients[i][3] != null){
-                            System.out.println("Patient details successfully updated.\n");
+                            if(patients[i][1] != null && patients[i][2]!= null && patients[i][3] != null){
+                                System.out.println("Patient details successfully updated.\n");
+                            }
+
+                            return;
+                        }else{
+                            System.out.println("No records found.");
                         }
-
-                        return;
-                    }else{
-                        System.out.println("No records found.");
                     }
                 }
+                System.out.println("No records found.");
+            }else{
+                System.out.println("Entered Id is wrong. Please check again.");
             }
-            System.out.println("No records found.");
-        }else{
-            System.out.println("Entered Id is wrong. Please check again.");
-        }
-
     }
 
     public static void deletePatients(String[][] patients, Scanner input){
@@ -303,7 +311,7 @@ public class Main {
             for(int i=0; i < patients.length; i++) {
                 for (int j = 0; j < patients[i].length; j++) {
 
-                    if (patients[i][0].equals(dPId)) {
+                    if (patients[i][0].equals(dPId) && patients[i][0] != null) {
 
                         patients[i][0] = null;
                         patients[i][1] = null;
@@ -467,17 +475,27 @@ public class Main {
                 System.out.println("Id" + "             " + "Name" + "              " + "Specialization" );
                 System.out.println("------------------------------------------------------------------------");
 
-                for(int i=0; i < doctors.length; i++) {
-                    for (int j = 0; j < doctors[i].length; j++) {
-
-                        if(doctors[i][0].equals(fDId)){
-                            System.out.print(doctors[i][0]+ "          " );
-                            System.out.print(doctors[i][1] + "              " );
-                            System.out.println(doctors[i][2] + "\n");
-                            return;
-                        }
+                for (String[] doctor : doctors) {
+                    if (doctor != null && doctor[0] != null && doctor[0].equals(fDId)) {
+                        System.out.print(doctors[0]+ "          " );
+                        System.out.print(doctors[1] + "              " );
+                        System.out.println(doctors[2] + "\n");
+                        return;
                     }
                 }
+
+//                for(int i=0; i < doctors.length; i++) {
+//                    for (int j = 0; j < doctors[i].length; j++) {
+//
+//                        if(doctors[i][0].equals(fDId) && doctors[i][0] != null){
+//                            System.out.print(doctors[i][0]+ "          " );
+//                            System.out.print(doctors[i][1] + "              " );
+//                            System.out.println(doctors[i][2] + "\n");
+//                            return;
+//                        }
+//                    }
+//                }
+                System.out.println("No records found.");
             }else{
                 System.out.println("No records found.");
             }
@@ -496,7 +514,7 @@ public class Main {
             for(int i=0; i < doctors.length; i++) {
                 for (int j = 0; j < doctors[i].length; j++) {
 
-                    if(doctors[i][0].equals(uDId)){
+                    if(doctors[i][0].equals(uDId) && doctors[i][0] != null){
 
                         System.out.println("Enter doctor name : ");
                         doctors[i][1] = input.nextLine();
@@ -728,19 +746,30 @@ public class Main {
                 System.out.println("Doctor's Id" + "             " + "Patient's Id" + "              " + "Date" + "             " + "Time");
                 System.out.println("------------------------------------------------------------------------");
 
-                for(int i=0; i < appointment.length; i++) {
-                    for (int j = 0; j < appointment[i].length; j++) {
 
-                        if(appointment[i][0].equals(fDId)){
-                            System.out.print(appointment[i][0]+ "          " );
-                            System.out.print(appointment[i][1] + "              " );
-                            System.out.print(appointment[i][2]+ "              " );
-                            System.out.println(appointment[i][3]);
-                            return;
-                        }
+                for (String[] appoint : appointment) {
+                    if (appoint != null && appoint[0] != null && appoint[0].equals(fDId)) {
+                        System.out.print(appointment[0]+ "          " );
+                        System.out.print(appointment[1] + "              " );
+                        System.out.print(appointment[2]+ "              " );
+                        System.out.println(appointment[3]);
+                        return;
                     }
                 }
-                System.out.println("No records found");
+
+//                for(int i=0; i < appointment.length; i++) {
+//                    for (int j = 0; j < appointment[i].length; j++) {
+//
+//                        if(appointment[i][0].equals(fDId) && appointment[i][0] != null){
+//                            System.out.print(appointment[i][0]+ "          " );
+//                            System.out.print(appointment[i][1] + "              " );
+//                            System.out.print(appointment[i][2]+ "              " );
+//                            System.out.println(appointment[i][3]);
+//                            return;
+//                        }
+//                    }
+//                }
+               System.out.println("No records found");
             }else {
                 System.out.println("No records found");
             }
