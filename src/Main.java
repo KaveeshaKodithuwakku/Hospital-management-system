@@ -267,38 +267,71 @@ public class Main {
         String uPId = input.nextLine();
         String tele = "";
 
-            if(uPId != null){
-                for(int i=0; i < patients.length; i++) {
-                    for (int j = 0; j < patients[i].length; j++) {
-
-                        if(patients[i][0].equals(uPId) && patients[i][0] != null){
-
-                            System.out.println("Enter patient name : ");
-                            patients[i][1] = input.nextLine();
-                            System.out.println("Enter patient age : ");
-                            patients[i][2] = input.nextLine();
-
-                            do {
-                                System.out.println("Enter Patient Contact : ");
-                                tele = input.nextLine();
-                            } while (isValidContact(tele));
-
-                            patients[i][3] = tele;
-
-                            if(patients[i][1] != null && patients[i][2]!= null && patients[i][3] != null){
-                                System.out.println("Patient details successfully updated.\n");
-                            }
-
-                            return;
-                        }else{
-                            System.out.println("No records found.");
-                        }
-                    }
-                }
-                System.out.println("No records found.");
-            }else{
-                System.out.println("Entered Id is wrong. Please check again.");
+        int rowNumber = -1;
+        for (int i = 0; i < patients.length; i++) {
+            if (patients[i][0].equals(uPId)) {
+                rowNumber = i;
+                break;
             }
+        }
+
+        if (rowNumber != -1) {
+               // for(int j=0; j < patients[rowNumber].length-1; j++) {
+                        System.out.println("Enter patient name : ");
+                        patients[rowNumber][1] = input.nextLine();
+                        System.out.println("Enter patient age : ");
+                        patients[rowNumber][2] = input.nextLine();
+
+                        do {
+                            System.out.println("Enter Patient Contact : ");
+                            tele = input.nextLine();
+                        } while (isValidContact(tele));
+
+                        patients[rowNumber][3] = tele;
+
+                        if(patients[rowNumber][1] != null && patients[rowNumber][2]!= null && patients[rowNumber][3] != null){
+                            System.out.println("Patient details successfully updated.\n");
+                        }
+
+                        return;
+                //}
+        } else {
+            System.out.println("Invalid Id");
+        }
+
+
+//            if(uPId != null){
+//                for(int i=0; i < patients.length; i++) {
+//                    for (int j = 0; j < patients[i].length; j++) {
+//
+//                        if(patients[i][0].equals(uPId) && patients[i][0] != null){
+//
+//                            System.out.println("Enter patient name : ");
+//                            patients[i][1] = input.nextLine();
+//                            System.out.println("Enter patient age : ");
+//                            patients[i][2] = input.nextLine();
+//
+//                            do {
+//                                System.out.println("Enter Patient Contact : ");
+//                                tele = input.nextLine();
+//                            } while (isValidContact(tele));
+//
+//                            patients[i][3] = tele;
+//
+//                            if(patients[i][1] != null && patients[i][2]!= null && patients[i][3] != null){
+//                                System.out.println("Patient details successfully updated.\n");
+//                            }
+//
+//                            return;
+//                        }else{
+//                            System.out.println("No records found.");
+//                        }
+//                    }
+//                }
+//                System.out.println("No records found.");
+//            }else{
+//                System.out.println("Entered Id is wrong. Please check again.");
+//            }
     }
 
     public static void deletePatients(String[][] patients, Scanner input){
@@ -308,31 +341,74 @@ public class Main {
         String dPId = input.nextLine();
 
         if(dPId != null){
-            for(int i=0; i < patients.length; i++) {
-                for (int j = 0; j < patients[i].length; j++) {
+            int rowNumber = -1;
+            for (int i = 0; i < patients.length; i++) {
+                if (patients[i][0].equals(dPId)) {
+                    rowNumber = i;
+                    break;
+                }
+            }
 
-                    if (patients[i][0].equals(dPId) && patients[i][0] != null) {
+            if (rowNumber != -1) {
 
-                        patients[i][0] = null;
-                        patients[i][1] = null;
-                        patients[i][2] = null;
-                        patients[i][3] = null;
+                    if (patients[rowNumber][0].equals(dPId) && patients[rowNumber][0] != null) {
+                        patients[rowNumber][0] = null;
+                        patients[rowNumber][1] = null;
+                        patients[rowNumber][2] = null;
+                        patients[rowNumber][3] = null;
 
-
-                        if(patients[i][0] == null && patients[i][1] == null && patients[i][2] == null && patients[i][3] == null ){
+                        if(patients[rowNumber][0] == null && patients[rowNumber][1] == null && patients[rowNumber][2] == null && patients[rowNumber][3] == null ){
                             System.out.println("Patient details successfully deleted.\n");
+                            showPatientUpdatedDetails(patients);
                         }
-
-                        return;
                     } else {
                         System.out.println("No records found.");
                     }
+                    return;
                 }
-            }
         }else{
             System.out.println("Entered Id is wrong. Please check again.");
         }
 
+
+//        if(dPId != null){
+//            for(int i=0; i < patients.length; i++) {
+//                for (int j = 0; j < patients[i].length; j++) {
+//
+//                    if (patients[i][0].equals(dPId) && patients[i][0] != null) {
+//
+//                        patients[i][0] = null;
+//                        patients[i][1] = null;
+//                        patients[i][2] = null;
+//                        patients[i][3] = null;
+//
+//
+//                        if(patients[i][0] == null && patients[i][1] == null && patients[i][2] == null && patients[i][3] == null ){
+//                            System.out.println("Patient details successfully deleted.\n");
+//                        }
+//
+//                        return;
+//                    } else {
+//                        System.out.println("No records found.");
+//                    }
+//                }
+//            }
+//        }else{
+//            System.out.println("Entered Id is wrong. Please check again.");
+//        }
+
+    }
+
+    public static void showPatientUpdatedDetails(String[][] patientArray) {
+
+        for (String[] patientRow : patientArray) {
+            if(patientRow[0]!= null){
+                for (String value : patientRow) {
+                        System.out.print(value + "      ");
+                }
+                System.out.println();
+            }
+        }
     }
 
     public static void viewAllPatients(String[][] patients){
@@ -477,9 +553,9 @@ public class Main {
 
                 for (String[] doctor : doctors) {
                     if (doctor != null && doctor[0] != null && doctor[0].equals(fDId)) {
-                        System.out.print(doctors[0]+ "          " );
-                        System.out.print(doctors[1] + "              " );
-                        System.out.println(doctors[2] + "\n");
+                        System.out.print(doctor[0]+ "          " );
+                        System.out.print(doctor[1] + "              " );
+                        System.out.println(doctor[2] + "\n");
                         return;
                     }
                 }
@@ -507,31 +583,63 @@ public class Main {
     public static void updateDoctors(String[][] doctors, Scanner input){
 
         input.nextLine();
-        System.out.println("Enter patient Id for update : ");
+        System.out.println("Enter doctor's Id for update : ");
         String uDId = input.nextLine();
 
-        if(uDId != null){
-            for(int i=0; i < doctors.length; i++) {
-                for (int j = 0; j < doctors[i].length; j++) {
-
-                    if(doctors[i][0].equals(uDId) && doctors[i][0] != null){
-
-                        System.out.println("Enter doctor name : ");
-                        doctors[i][1] = input.nextLine();
-                        System.out.println("Enter doctor specialization : ");
-                        doctors[i][2] = input.nextLine();
-
-                        if(doctors[i][0] != null && doctors[i][1] != null && doctors[i][2] != null){
-                            System.out.println("Doctor details successfully updated.\n");
+                if(uDId != null){
+                    int rowNumber = -1;
+                    for (int i = 0; i < doctors.length; i++) {
+                        if (doctors[i][0].equals(uDId)  && !doctors[i][0].equals(null)) {
+                            rowNumber = i;
+                            break;
                         }
-                        return;
                     }
-                }
-            }
-            System.out.println("No records found\n");
-        }else{
-            System.out.println("Entered Id is wrong. Please check again.\n");
-        }
+
+                    if (rowNumber != -1) {
+                                System.out.println("Enter doctor name : ");
+                                doctors[rowNumber][1] = input.nextLine();
+                                System.out.println("Enter doctor specialization : ");
+                                doctors[rowNumber][2] = input.nextLine();
+
+                                if(doctors[rowNumber][0] != null && doctors[rowNumber][1] != null && doctors[rowNumber][2] != null){
+                                    System.out.println("Doctor details successfully updated.\n");
+                                }
+                                return;
+                    }else {
+                        System.out.println("No records for this id. Please check and try again.\n");
+                    }
+
+                    }else{
+                        System.out.println("Invalid Id.\n");
+                    }
+
+
+
+
+//        if(uDId != null){
+//            for(int i=0; i < doctors.length; i++) {
+//                for (int j = 0; j < doctors[i].length; j++) {
+//
+//                    if(doctors[i][0].equals(uDId) && doctors[i][0] != null){
+//
+//                        System.out.println("Enter doctor name : ");
+//                        doctors[i][1] = input.nextLine();
+//                        System.out.println("Enter doctor specialization : ");
+//                        doctors[i][2] = input.nextLine();
+//
+//                        if(doctors[i][0] != null && doctors[i][1] != null && doctors[i][2] != null){
+//                            System.out.println("Doctor details successfully updated.\n");
+//                        }
+//                        return;
+//                    }else {
+//                        System.out.println("No records found\n");
+//                    }
+//                }
+//            }
+//
+//        }else{
+//            System.out.println("Entered Id is wrong. Please check again.\n");
+//        }
 
     }
 
@@ -541,28 +649,69 @@ public class Main {
         System.out.println("Enter Doctor's Id : ");
         String dDId = input.nextLine();
 
-        if(dDId != null){
-
-                for(int i=0; i < doctors.length; i++) {
-                    for (int j = 0; j < doctors[i].length; j++) {
-
-                        if(doctors[i][0].equals(dDId)){
-
-                            doctors[i][0] = null;
-                            doctors[i][1] = null;
-                            doctors[i][2] = null;
-
-                            if(doctors[i][0] == null && doctors[i][1] == null && doctors[i][2] == null){
-                                System.out.println("Doctor details successfully deleted.\n");
-                            }
-                            return;
-                        }else{
-                            System.out.println("No records found\n");
+                if(dDId != null){
+                    int rowNumber = -1;
+                    for (int i = 0; i < doctors.length; i++) {
+                        if (doctors[i][0].equals(dDId)) {
+                            rowNumber = i;
+                            break;
                         }
                     }
+
+                    if (rowNumber != -1) {
+
+                                doctors[rowNumber][0] = null;
+                                doctors[rowNumber][1] = null;
+                                doctors[rowNumber][2] = null;
+
+                                if(doctors[rowNumber][0] == null && doctors[rowNumber][1] == null && doctors[rowNumber][2] == null){
+                                    System.out.println("Doctor details successfully deleted.\n");
+                                    showDetails(doctors);
+                                }
+                    }else {
+                        System.out.println("No records for this id. Please check and try again.");
+                    }
+
+                }else{
+                   System.out.println("Invalid Id.");
                 }
-        }else{
-            System.out.println("Entered Id is wrong. Please check again.");
+
+
+
+//        if(dDId != null){
+//
+//                for(int i=0; i < doctors.length; i++) {
+//                    for (int j = 0; j < doctors[i].length; j++) {
+//
+//                        if(doctors[i][0].equals(dDId)){
+//
+//                            doctors[i][0] = null;
+//                            doctors[i][1] = null;
+//                            doctors[i][2] = null;
+//
+//                            if(doctors[i][0] == null && doctors[i][1] == null && doctors[i][2] == null){
+//                                System.out.println("Doctor details successfully deleted.\n");
+//                            }
+//                            return;
+//                        }else{
+//                            System.out.println("No records found\n");
+//                        }
+//                    }
+//                }
+//        }else{
+//            System.out.println("Entered Id is wrong. Please check again.");
+//        }
+    }
+
+    public static void showDetails(String[][] doctorArray) {
+
+        for (String[] doctorRow : doctorArray) {
+            if(doctorRow[0]!=null){
+                for (String value : doctorRow) {
+                    System.out.print(value + "      ");
+                }
+                System.out.println();
+            }
         }
     }
 
